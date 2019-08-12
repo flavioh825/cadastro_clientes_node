@@ -3,6 +3,6 @@ API CRUD feita com NodeJs + ExpressJs + MySql (cadastro de clientes)
 
 Para testar:
 
->npm install
->Crie o banco e rode o comando node create-table.js
->npm index.js
+>npm install<br />
+>Crie o banco e rode o comando node create-table.js<br />
+>npm index.js<br />
