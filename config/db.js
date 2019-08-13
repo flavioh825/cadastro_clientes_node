@@ -4,7 +4,7 @@ const database = {
   port: '3306',
   user: 'root',
   password: '',
-  database: 'cadastro_cliente'
+  database: 'cadastro_clientes'
 }
 
 module.exports = database;

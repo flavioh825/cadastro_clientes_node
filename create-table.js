@@ -16,7 +16,7 @@ function createTable(conn) {
   conn.query(sql, function(error, results, fields) {
     if(error) return console.log(error);
     console.log('Table "clientes" is created!');
-    populateTable(db);
+    populateTable(conn);
   });
 }
 
@@ -38,5 +38,5 @@ function populateTable(conn) {
 connection.connect(function(err) {
   if(err) return console.log(err);
   console.log('connected!');
-  createTable(db);
+  createTable(connection);
 });
