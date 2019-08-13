@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const bcrypt = require('bcrypt');
 const db = require('./config/db');
 
 // criando conexão
@@ -20,9 +21,23 @@ function createTable(conn) {
   });
 }
 
+// criando a tabela Usuarios
+function createUserTable(conn) {
+  const sql = `CREATE TABLE IF NOT EXISTS Usuarios (
+              id int NOT NULL AUTO_INCREMENT,
+              email varchar(200) NOT NULL, 
+              senha varchar(255) NOT NULL,
+              PRIMARY KEY (ID));`;
+  conn.query(sql, function(error, results, fields) {
+    if(error) return console.log(error);
+    console.log('Table "usuarios" is created!');
+    populateUserTable(conn);
+  });
+}
+
 // populando a tabela clientes
 function populateTable(conn) {
-  const sql = `INSERT INTO Clientes(nome, cpf, telefone, email) VALUES ?`;
+  const sql = `INSERT INTO clientes(nome, cpf, telefone, email) VALUES ?`;
   const values = [
     ['Cleberson', '14525415177', '21952644488', 'cleberson@gmail.com'],
     ['Adalberto', '98558965896', '41965888221', 'adalberto@gmail.com'],
@@ -30,7 +45,23 @@ function populateTable(conn) {
   ];
   conn.query(sql, [values], function(err, results, fields){
     if(err) return console.log(err);
-    console.log('records added!');
+    console.log('Clientes adicionados!');
+  });
+}
+
+// populando a tabela Usuários
+const salt = 10;
+var senhaUsuarioPadrao = '123456';
+var senhaCriptografada = bcrypt.hashSync(senhaUsuarioPadrao, salt); // gerando senha para o usuário padrão
+
+function populateUserTable(conn) {
+  const sql = `INSERT INTO usuarios(email, senha) VALUES ?`;
+  const values = [
+    ['user@gmail.com', senhaCriptografada]
+  ];
+  conn.query(sql, [values], function(err, results, fields){
+    if(err) return console.log(err);
+    console.log('Usuário default adicionado!');
   });
 }
 
@@ -39,4 +70,5 @@ connection.connect(function(err) {
   if(err) return console.log(err);
   console.log('connected!');
   createTable(connection);
+  createUserTable(connection);
 });

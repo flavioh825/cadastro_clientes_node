@@ -3,6 +3,10 @@ const app = express();
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 
+// JWT
+require('dotenv-safe').load();
+var jwt = require('jsonwebtoken');
+
 // Definindo BodyParser
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
