@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const mysql = require('mysql');
 const db = require('../config/db');
+const verifyJWT = require('../config/jwt');
 
 // index
-router.get('/clientes', (req, res) => {
+router.get('/clientes', verifyJWT, (req, res) => {
   let sql = `SELECT id, nome, cpf, telefone, email FROM Clientes`;
   sqlQuery(sql, null, res);
 });
