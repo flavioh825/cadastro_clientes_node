@@ -6,7 +6,7 @@ API CRUD feita com NodeJs + ExpressJs + MySql (cadastro de clientes)
 * MySql - `npm i mysql` (banco de dados)
 * Body-parser - `npm i body-parser` (Para as requisições)
 
-## Siga os passos abaixo para testar:<br />
+## Siga os passos abaixo para testar<br />
 (todos os comandos devem ser digitados no console dentro da pasta do projeto)
 
 * Instale as dependencias digitando:<br />
