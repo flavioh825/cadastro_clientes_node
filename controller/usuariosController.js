@@ -26,7 +26,7 @@ router.post('/usuarios', (req, res) => {
 });
 
 // delete
-router.delete('/usuarios/:id', (req, res) => {
+router.delete('/usuarios/:id', verifyJWT, (req, res) => {
   let sql = `DELETE FROM usuarios WHERE id = ?`;
   let params = [parseInt(req.params.id)];
   sqlQuery(sql, params, res);
@@ -56,7 +56,7 @@ router.post('/usuarios/login', (req, res) => {
 });
 
 // logout
-router.get('/logout', (req, res) => {
+router.get('/usuarios/logout', (req, res) => {
   res.status(200).send({auth: false, token: null});
 });
 

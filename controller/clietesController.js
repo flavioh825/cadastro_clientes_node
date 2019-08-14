@@ -17,14 +17,14 @@ router.get('/clientes/:id?', (req, res) => {
 });
 
 // delete
-router.delete('/clientes/:id?', (req, res) => {
+router.delete('/clientes/:id?', verifyJWT, (req, res) => {
   let params = [parseInt(req.params.id)];
   let sql = `DELETE FROM Clientes WHERE id = ?`;
   sqlQuery(sql, params, res);
 });
 
 // create
-router.post('/clientes', (req, res) => {
+router.post('/clientes', verifyJWT, (req, res) => {
   let data = [
     nome = req.body.nome.substring(0, 200),
     cpf = req.body.cpf.substring(0, 11),
@@ -37,7 +37,7 @@ router.post('/clientes', (req, res) => {
 });
 
 // update
-router.patch('/clientes/:id', (req, res) => {
+router.patch('/clientes/:id', verifyJWT, (req, res) => {
   let data = [
     id = parseInt(req.params.id),
     nome = req.body.nome.substring(0, 200),
